@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS puzzle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="js/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="js/puzzle/slidingPuzzle.js"></script>
+	<script type="text/javascript" src="js/puzzle/wordSearchPuzzle.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body ng-app="puzzleApp">
+	<ul id="types">
+		<li id="pagehead">Puzzle</li>
+	</ul>
+
+	<div ng-include="type"></div>
+
+	<script type="text/ng-template" id="sliding-puzzle">
+		
+		<fieldset id="sliding-advanced" ng-controller="slidingAdvancedCtrl">
+			<div ng-repeat="puzzle in puzzles">
+				<h2>{{puzzle.title}}</h2>
+				<div class="status">
+					moves: <strong>{{puzzle.api.moves}}</strong><br/>
+					solved: <strong>{{puzzle.api.isSolved()}}</strong>
+				</div>
+				<div class="size">
+					<button ng-click="puzzle.api.shuffle()">shuffle</button>
+					<button ng-click="puzzle.api.solve()">solve</button>
+				</div>
+				<sliding-puzzle api="puzzle.api" size="{{puzzle.rows}}x{{puzzle.cols}}" src="{{puzzle.src}}"></sliding-puzzle>
+			</div>
+		</fieldset>
+	</script>
+
+	
+</body>
+</html>
